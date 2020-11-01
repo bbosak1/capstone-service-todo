@@ -24,6 +24,7 @@ app.use(function (req, res, next) {
 
 var Todo = mongoose.model('Todo', {
     descr: String,
+    assignee: String,
 });
 
 // Get all todos
@@ -49,6 +50,7 @@ app.post('/api/todos', function (req, res) {
 
     Todo.create({
         descr: req.body.descr,
+        assignee: req.body.assignee,
     }, function (err, todo) {
         if (err) {
             res.send(err);
