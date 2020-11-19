@@ -66,6 +66,26 @@ app.post('/api/todos', function (req, res) {
 
 });
 
+// Delete a todo
+app.delete('/api/todos/:id', function (req, res) {
+    Todo.remove({
+        _id: req.params.id
+    }, function (err, todo) {
+        if (err) {
+            console.error("Error deleting todo ", err);
+        }
+        else {
+            Todo.find(function (err, todos) {
+                if (err) {
+                    res.send(err);
+                }
+                else {
+                    res.json(todos);
+                }
+            });
+        }
+    });
+});
 
 // Start app and listen on port 8082
 app.listen(process.env.PORT || 8082);
